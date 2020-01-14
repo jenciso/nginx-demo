@@ -5,7 +5,7 @@
 Adicione mais um servidor
 
 ```
-./new-vm.sh -n web03 -m 512 -c 1 -i 192.168.122.14
+./new-vm.sh -n web03 -m 512 -c 1 -i 192.168.122.15
 ```
 
 Modifique o arquivo inventory com o seguinte conteúdo:
