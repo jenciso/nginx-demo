@@ -115,3 +115,10 @@ Rode o playbook
 ```
 ansible-playbook -i inventory site.yml
 ``` 
+
+Entrar no site
+
+```
+firefox http://192.168.122.13
+firefox http://192.168.122.14
+```
