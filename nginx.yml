@@ -1,0 +1,25 @@
+---
+- hosts: all
+  tasks:
+    - name: ensure nginx is at the latest version
+      yum: name=nginx state=latest
+
+    - name: copy the nginx config
+      copy:
+        src: ./nginx.conf
+        dest: /etc/nginx/nginx.conf
+
+    - name: copy the default config file
+      copy:
+        src: ./default.conf
+        dest: /etc/nginx/conf.d/default.conf
+
+    - name: copy the content of the web site
+      copy:
+        src: ./static-site-src/
+        dest: /usr/share/nginx/html
+
+    - name: restart nginx
+      service:
+        name: nginx
+        state: restarted
