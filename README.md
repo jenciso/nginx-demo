@@ -64,3 +64,38 @@ Modifique novamente e agora só execute numa VM só
 ansible-playbook site.yml -i inventory -t nginx-config --limit=web_servers[0]
 ```
 
+Baixe manualmente o nginx de uma VM
+
+```
+ssh centos@192.168.122.13
+sudo su - 
+systemctl stop nginx
+exit; exit
+```
+
+Rode o playbook
+
+```
+ansible-playbook site.yml -i inventory --skip-tags nginx-install
+``` 
+
+Crie um arquivo `site-quick.yml`
+
+```
+---
+- name: nginx-demo | provisiona um website em nginx
+  hosts: all
+  gather_facts: no
+  remote_user: centos
+  roles:
+    - nginx-website
+```
+
+Rode o playbook criado
+
+```
+ansible-playbook site-quick.yml -i inventory 
+```
+
+Compare os tempos usando o comando `time`
+
