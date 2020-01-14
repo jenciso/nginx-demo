@@ -1,114 +1,38 @@
 ## TUTORIAL ANSIBLE 
 
-### Adicionando Conteúdo ao website
+### Scale
 
-Crie uma pasta `static-site-src`
-
-``` 
-mkdir static-site-src
-cd static-site-src
-```
-
-Dentro dessa pasta crie um arquivo `index.html` com o seguinte conteúdo
+Adicione mais um servidor
 
 ```
-<h1>Welcome to Ansible</h1>
-<img src="/ansible-logo.jpg" />
+./new-vm.sh -n web03 -m 512 -c 1 -i 192.168.122.14
 ```
 
-Agora baixe um arquivo de imagem dentro dessa pasta
+Modifique o arquivo inventory com o seguinte conteúdo:
 
 ```
-curl -sL https://www.ansible.com/hubfs/Images/Red-Hat-Ansible_OG_1200x630.png -o ansible-logo.png
+[web_servers]
+192.168.122.13 ansible_ssh_user=centos
+192.168.122.14 ansible_ssh_user=centos
+192.168.122.15 ansible_ssh_user=centos
 ```
 
-## Criando os arquivos de configuração
-
-Voltando um nivel anterior crie os arquivos de configuração para o nginx
-
-* Arquivo `nginx.conf`
+Verifique se o ansible está configurado e tem comunicação com esta VM
 
 ```
-user nginx;
-worker_processes auto;
-error_log /var/log/nginx/error.log;
-pid /run/nginx.pid;
-
-include /usr/share/nginx/modules/*.conf;
-
-events {
-    worker_connections 1024;
-}
-
-http {
-    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
-                      '$status $body_bytes_sent "$http_referer" '
-                      '"$http_user_agent" "$http_x_forwarded_for"';
-
-    access_log  /var/log/nginx/access.log  main;
-
-    sendfile            on;
-    tcp_nopush          on;
-    tcp_nodelay         on;
-    keepalive_timeout   65;
-    types_hash_max_size 2048;
-
-    include             /etc/nginx/mime.types;
-    default_type        application/octet-stream;
-
-    include /etc/nginx/conf.d/*.conf;
-
-}
-``` 
-
-* Crie o arquivo default.conf
-
-```
-server {
-        listen 80 default_server;
-        listen [::]:80 default_server;
-        root /usr/share/nginx/html;
-        server_name _;
-        location / {
-                try_files $uri $uri/ =404;
-        }
-}
-```
-
-## Criando o playbook
-
-Crie o arquivo site.yml
-
-```
----
-- hosts: all
-  tasks:
-    - name: ensure nginx is at the latest version
-      yum: name=nginx state=latest
-
-    - name: copy the nginx config
-      copy:
-        src: ./nginx.conf
-        dest: /etc/nginx/nginx.conf
-
-    - name: copy the default config file
-      copy:
-        src: ./default.conf
-        dest: /etc/nginx/conf.d/default.conf
-
-    - name: copy the content of the web site
-      copy:
-        src: ./static-site-src/
-        dest: /usr/share/nginx/html
-
-    - name: restart nginx
-      service:
-        name: nginx
-        state: restarted
+ansible -m ping -i inventory web_servers
 ```
 
 Rode o playbook
+```
+ansible-playbook -i inventory site.yml
+```
+
+Verifique nos 3 servidores se o nginx está com o conteúdo do website
 
 ```
-ansible -i inventory site.yml
-``` 
+firefox 192.168.122.13 
+firefox 192.168.122.14
+firefox 192.168.122.15
+```
+
