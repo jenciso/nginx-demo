@@ -13,7 +13,7 @@ Dentro dessa pasta crie um arquivo `index.html` com o seguinte conteúdo
 
 ```
 <h1>Welcome to Ansible</h1>
-<img src="/ansible-logo.jpg" />
+<img src="/ansible-logo.png" />
 ```
 
 Agora baixe um arquivo de imagem dentro dessa pasta
