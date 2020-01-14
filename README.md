@@ -24,26 +24,7 @@ ansible -m ping -i inventory web_servers
 
 ## INSTALL NGINX
 
-Instale o pacote `nginx` via ansible. Para aquilo crie um arquivo `nginx-install.yml` com seguinte conteúdo
-
-```yaml
----
-- hosts: all
-  tasks:
-    - name: Install epel-release
-      yum: name=epel-release state=present
-
-    - name: ensure nginx is at the latest version
-      yum: name=nginx state=latest
-
-    - name: start nginx
-      service:
-          name: nginx
-          state: started
-
-```
-
-Agora rode o playbook criado 
+Agora rode o playbook criado anteriormente
 
 ```shell
 ansible-playbook -i inventory nginx-install.yml 
