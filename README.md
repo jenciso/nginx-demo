@@ -4,20 +4,20 @@
 
 Usando o repositorio [kvm-provision](https://github.com/jenciso/kvm-provision), crie uma VM:
 
-```
+```shell
 ./new-vm.sh -n web01 -m 512 -c 1 -i 192.168.122.13
 ```
 
 Logo provisione crie um arquivo `inventory` com o seguinte conteúdo:
 
-```
+```toml
 [web_servers]
 192.168.122.13  ansible_ssh_user=centos
 ```
 
 Verifique se o ansible está configurado e tem comunicação com esta VM
 
-```
+```shell
 ansible -m ping -i inventory web_servers
 ansible -m ping -i inventory web_servers[0]
 ```
@@ -45,17 +45,17 @@ Instale o pacote `nginx` via ansible. Para aquilo crie um arquivo `nginx-install
 
 Agora rode o playbook criado 
 
-```
+```shell
 ansible-playbook -i inventory nginx-install.yml 
 ```
 
 Vuelva rodar o playbook agora sendo mais verbose
-```
+```shell
 ansible-playbook -i inventory nginx-install.yml -v
 ```
 
-Alem disso você pode observar o que está fazendo o ansible acessando ao servidor web01
-```
+Alem disso você pode observar o que está fazendo o ansible acessando ao servidor **web01**
+```shell
 ssh centos@192.168.122.13
 sudo su - 
 tail -f /var/log/messages
@@ -89,7 +89,7 @@ while true; do curl -m 10 -s -w "http_status: %{http_code} | time: %{time_total}
 
 Criamos outro playbook com o nome: `nginx-uninstall` e com o seguinte conteúdo
 
-```
+```yaml
 ---
 - hosts: all
   tasks:
