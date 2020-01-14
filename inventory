@@ -1,0 +1,2 @@
+[nginx_server]
+192.168.122.13 ansible_ssh_user=centos
