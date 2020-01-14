@@ -113,5 +113,5 @@ Crie o arquivo site.yml
 Rode o playbook
 
 ```
-ansible -i inventory site.yml
+ansible-playbook -i inventory site.yml
 ``` 
