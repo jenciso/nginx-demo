@@ -99,3 +99,7 @@ ansible-playbook site-quick.yml -i inventory
 
 Compare os tempos usando o comando `time`
 
+
+References:
+
+https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html
