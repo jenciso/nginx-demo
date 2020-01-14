@@ -1,3 +1,4 @@
 [web_servers]
 192.168.122.13  ansible_ssh_user=centos
 192.168.122.14  ansible_ssh_user=centos
+192.168.122.15  ansible_ssh_user=centos
