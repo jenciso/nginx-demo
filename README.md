@@ -108,3 +108,8 @@ Rodamos o playbook
 ansible-playbook -i inventory nginx-uninstall.yml
 ``` 
 
+E verificamos o webserver
+
+```
+curl -vs http://192.168.122.13
+```
