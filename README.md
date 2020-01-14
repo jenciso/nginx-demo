@@ -83,6 +83,9 @@ Crie o arquivo site.yml
 ---
 - hosts: all
   tasks:
+    - name: install dependences
+      yum: name=epel-release state=present
+
     - name: ensure nginx is at the latest version
       yum: name=nginx state=latest
 
