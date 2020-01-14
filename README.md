@@ -10,9 +10,9 @@ Usando o repositorio [kvm-provision](https://github.com/jenciso/kvm-provision), 
 
 Logo provisione crie um arquivo `inventory` com o seguinte conteúdo:
 
-```toml
+```
 [web_servers]
-192.168.122.13  ansible_ssh_user=centos
+192.168.122.13 ansible_ssh_user=centos
 ```
 
 Verifique se o ansible está configurado e tem comunicação com esta VM
