@@ -25,7 +25,7 @@
   template:
     src: default.conf
     dest: /etc/nginx/conf.d/default.conf
-  notify: restart nginx
+  notify: reload nginx
   tags:
     - nginx-config
 
@@ -38,7 +38,10 @@
     - content/index.html
     - content/ansible-logo.png
 
+
 - name: nginx-website | start nginx
-  service:
+  systemd:
     name: nginx
     state: started
+    enabled: yes
+

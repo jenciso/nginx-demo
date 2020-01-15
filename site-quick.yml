@@ -1,0 +1,7 @@
+---
+- name: nginx-demo | provisiona um website em nginx
+  hosts: all
+  gather_facts: no
+  remote_user: centos
+  roles:
+    - nginx-website
