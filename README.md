@@ -5,9 +5,9 @@
 Apague as VM's
 
 ```
-./new-vm.sh -n web01
-./new-vm.sh -n web02
-./new-vm.sh -n web03
+./del-vm.sh -n web01
+./del-vm.sh -n web02
+./del-vm.sh -n web03
 ```
 
 Crie as VM's denovo
