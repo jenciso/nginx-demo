@@ -5,16 +5,16 @@
 Apague as VM's
 
 ```
-./del-vm.sh -n web01
-./del-vm.sh -n web02
-./del-vm.sh -n web03
+./del-vm.sh web01
+./del-vm.sh web02
+./del-vm.sh web03
 ```
 
 Crie as VM's denovo
 ```
-./new-vm.sh -n web01 -m 512 -c 1 -i 192.168.122.13
-./new-vm.sh -n web02 -m 512 -c 1 -i 192.168.122.14
-./new-vm.sh -n web03 -m 512 -c 1 -i 192.168.122.15
+./new-vm.sh -n web01 -m 256 -c 1 -i 192.168.122.13
+./new-vm.sh -n web02 -m 256 -c 1 -i 192.168.122.14
+./new-vm.sh -n web03 -m 256 -c 1 -i 192.168.122.15
 ``` 
 
 O arquivo inventory já deve ter o seguinte conteúdo:
